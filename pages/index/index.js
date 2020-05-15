@@ -4,10 +4,11 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
+    motto: 'Hello World!',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    isLogin: false,
   },
   //事件处理函数
   bindViewTap: function() {
@@ -15,7 +16,27 @@ Page({
       url: '../logs/logs'
     })
   },
+  goLogin: () => {
+    wx.navigateTo({
+      url: '../login/login'
+    })
+  },
   onLoad: function () {
+    wx.checkSession({
+      success: res => {
+        //session_key 未过期，并且在本生命周期一直有效
+        console.log('session_key ok:', res)
+        this.setData({
+          isLogin: true
+        })
+      },
+      fail: res => {
+        // session_key 已经失效，需要重新执行登录流程
+        console.log('session_key failed:', res)
+        // wx.login() //重新登录
+      }
+    })
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
