@@ -16,6 +16,7 @@ Page({
       url: '../logs/logs'
     })
   },
+  // 跳转到登录页
   goLogin: () => {
     wx.navigateTo({
       url: '../login/login'
@@ -65,7 +66,7 @@ Page({
     }
   },
   getUserInfo: function(e) {
-    console.log(e)
+    console.log('function getUserInfo')
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
