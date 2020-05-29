@@ -16,33 +16,50 @@ Page({
   },
   checkSession: function(detail) {
     let isValid = false
+    const uid = wx.getStorageSync("uid")
     wx.checkSession({
       success: res => {
         //session_key 未过期，并且在本生命周期一直有效
-        this.goWxlogin(detail, true)
+        request({
+          url: "/api/wx/login",
+          method: "POST",
+          data: {
+            detail,
+            uid,
+          },
+          success: (res1) => {
+            if (res1.data.code === 200) {
+              wx.setStorageSync('uid', res1.data.uid)
+            }
+            console.log('login res:', res1.data)
+          }
+        })
+        // this.goWxlogin(detail) // 验证未过期情况下数据解密是否成功
       },
       fail: res => {
         // session_key 已经失效，需要重新执行登录流程
-        this.goWxlogin(detail, false)
+        this.goWxlogin(detail, uid)
       }
     })
   },
   // 微信登录逻辑, 需要用户授权才能拿到 unionid
-  goWxlogin: function (detail, keyIsValid) {
+  goWxlogin: function (detail, uid) {
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log(res)
         request({
           url: "/api/wx/login",
           method: "POST",
           data: {
             code: res.code,
             detail,
-            keyIsValid,
+            uid,
           },
           success: (res1) => {
-            console.log('login res:', res1)
+            if (res1.data.code === 200) {
+              wx.setStorageSync('uid', res1.data.uid)
+            }
+            console.log('login res:', res1.data)
           }
         })
       },
@@ -71,7 +88,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log('userInfo', app.globalData.userInfo)
+    console.log('uid: ', wx.getStorageSync("uid"))
     wx.checkSession({
       success: res => {
         //session_key 未过期，并且在本生命周期一直有效

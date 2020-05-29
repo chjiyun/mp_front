@@ -1,7 +1,7 @@
-// const urlPrefix = "https://mp.chjiyun.com"
-const urlPrefix = "http://127.0.0.1:7001"
+// const urlOrigin = "https://mp.chjiyun.com"
+const urlOrigin = "http://127.0.0.1:7001"
 const request = function(params) {
-  const url = `${urlPrefix}/${params.url}`
+  const url = `${urlOrigin}${params.url}`
   delete params.url
   return wx.request({
     url,
@@ -16,4 +16,5 @@ const request = function(params) {
 
 module.exports = {
   request,
+  urlOrigin,
 }

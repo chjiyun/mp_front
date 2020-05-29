@@ -1,0 +1,22 @@
+{
+  "name": "mp_front",
+  "version": "1.0.0",
+  "description": "小程序测试",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chjiyun/mp_front.git"
+  },
+  "author": "chjiyun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chjiyun/mp_front/issues"
+  },
+  "homepage": "https://github.com/chjiyun/mp_front#readme",
+  "dependencies": {
+    "weapp.socket.io": "^2.0.6"
+  }
+}

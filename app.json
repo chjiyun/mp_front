@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/login/login",
     "pages/index/index",
+    "pages/login/login",
+    "pages/chat/chat",
     "pages/logs/logs"
   ],
   "window": {
@@ -20,6 +21,10 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页"
+      },
+      {
+        "pagePath": "pages/chat/chat",
+        "text": "聊天"
       },
       {
         "pagePath": "pages/logs/logs",
