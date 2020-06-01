@@ -1,2 +1,5 @@
 <!--pages/chat/chat.wxml-->
-<text>test chat...</text>
+<view class="chat_container">
+  <textarea class="chat_text" auto-focus bindinput="onChageMsg"></textarea>
+  <button class="chat_btn" type="primary" bindtap="sendMsg">发送</button>
+</view>

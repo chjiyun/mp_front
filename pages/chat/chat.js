@@ -1,58 +1,77 @@
 // pages/chat/chat.js
 const { urlOrigin } = require('../../utils/request.js')
 const io = require('weapp.socket.io')
-const socket = io(urlOrigin)
 
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-
+    content: "",
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    socket.on('connect', function () {
-      console.log('connected')
-    });
+  onShow: function () {
+    // socket.on('connect', function () {
+    //   console.log('connected', socket.connected)
+    // });
 
-    socket.on('news', d => {
-      console.log('received news: ', d)
-    })
-
-    socket.emit('news', {
-      title: 'this is a news'
+    // socket.on('receive', d => {
+    //   console.log('received news: ', d)
+    // })
+  },
+  onChageMsg: function(e) {
+    this.setData({
+      content: e.detail.value,
     })
   },
-
-  // /**
-  //  * 生命周期函数--监听页面卸载
-  //  */
+  sendMsg: function() {
+    socket.emit('send', {
+      title: this.data.content,
+    })
+  },
   // onUnload: function () {
 
   // },
+  createConnect: function (e) {
+    // this.amendMessage(createSystemMessage('正在加入群聊...'))
+    const socket = (this.socket = io(urlOrigin))
 
-  // /**
-  //  * 页面相关事件处理函数--监听用户下拉动作
-  //  */
-  // onPullDownRefresh: function () {
+    socket.on('connect', function () {
+      console.log('connected', socket.connected)
+    });
 
-  // },
+    socket.on('new message', d => {
+      const { username, message } = d
+      this.pushMessage(createUserMessage(message, username))
+    })
 
-  // /**
-  //  * 页面上拉触底事件的处理函数
-  //  */
-  // onReachBottom: function () {
+    socket.on('user joined', (d) => {
+      this.pushMessage(
+        createSystemMessage(`${d.username} 来了，当前共有 ${d.numUsers} 人`)
+      )
+    })
 
-  // },
+    socket.on('user left', (d) => {
+      this.pushMessage(
+        createSystemMessage(`${d.username} 离开了，当前共有 ${d.numUsers} 人`)
+      )
+    })
+    
+    socket.on('typing', (d) => {
+      wx.setNavigationBarTitle({
+        title: `${d.username} is typing...`
+      })
+    })
 
-  // /**
-  //  * 用户点击右上角分享
-  //  */
-  // onShareAppMessage: function () {
+    socket.on('stop typing', (d) => {
+      wx.setNavigationBarTitle({
+        title: '在线聊天室'
+      })
+    })
 
-  // }
+    socket.emit('add user', this.me.nickName)
+  }
 })

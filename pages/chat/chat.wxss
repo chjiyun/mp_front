@@ -1,1 +1,4 @@
 /* pages/chat/chat.wxss */
+.chat_text {
+  width: 100%;
+}
