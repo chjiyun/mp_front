@@ -23,10 +23,6 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/chat/chat",
-        "text": "聊天"
-      },
-      {
         "pagePath": "pages/logs/logs",
         "text": "日志"
       }

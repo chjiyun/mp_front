@@ -1,10 +1,17 @@
 <!--index.wxml-->
 <view class="container">
+  <view class="page__hd">
+    <view class="page__title">聊天室 Demo</view>
+  </view>
+
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" bindtap="goLogin"> 去登录 </button>
     <block wx:else>
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <view class="page__bd_spacing">
+        <navigator url="/pages/chat/chat" hover-class="weui-cell_active" class="chat-btn">进入聊天室</navigator>
+      </view>
     </block>
     <!-- <button wx:if="{{!isLogin}}" bindtap="goLogin">去登录</button> -->
   </view>

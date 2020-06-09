@@ -22,7 +22,7 @@ App({
           wx.getUserInfo({
             // withCredentials: true,
             success: res => {
-              console.log('userInfo', res)
+              // console.log('userInfo', res)
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
 

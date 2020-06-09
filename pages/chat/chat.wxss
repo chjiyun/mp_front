@@ -1,4 +1,150 @@
 /* pages/chat/chat.wxss */
-.chat_text {
+/* .chat_text {
   width: 100%;
+} */
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  background: #ebebeb;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.chat-container {
+  flex: 1;
+  text-align: center;
+  overflow-y: auto;
+}
+
+.system-message {
+  font-size: 24rpx;
+  color: #cecece;
+  display: inline-block;
+}
+
+.user-message {
+  margin: 0 20rpx;
+  text-align: left;
+  font-size: 0;
+  display: flex;
+}
+
+.avatar {
+  width: 84rpx;
+  height: 84rpx;
+  border: #a5a5a7 1rpx solid;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.text {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.user-message.other .text {
+  margin-left: 19rpx;
+}
+
+.user-message.other .text view {
+  display: inline-block;
+}
+
+.text .nickname {
+  color: #737373;
+}
+
+.text .content {
+  font-size: 34rpx;
+  padding-left: 10rpx;
+  position: relative;
+}
+
+.text .nickname {
+  font-size: 34rpx;
+}
+
+.user-message.other .text .content::after,
+.user-message.other .text .content::before {
+  right: 100%;
+  border-right-style: solid;
+}
+
+.input-panel {
+  height: 100rpx;
+  box-sizing: border-box;
+  padding: 13rpx 20rpx 0;
+  background: #f5f5f7;
+  border-top: #d7d7d9 1rpx solid;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.send-input {
+  flex: 1;
+  height: 72rpx;
+  background: #fff;
+  border: #ddd 1rpx solid;
+  border-radius: 3px;
+  /* margin-right: 20rpx; */
+  box-sizing: border-box;
+  /* padding: 0 10rpx; */
+}
+
+.me .nickname {
+  display: none;
+}
+
+@media (max-width: 360px) {
+  .avatar {
+    width: 100rpx;
+    height: 100rpx;
+  }
+
+  .text .content {
+    font-size: 36rpx;
+    line-height: 44rpx;
+    padding: 20rpx;
+    position: relative;
+  }
+
+  .text .nickname {
+    font-size: 42rpx;
+  }
+
+  .user-message.other .text .content::before {
+    top: 22rpx;
+    border-right-color: #ccc;
+  }
+
+  .user-message.other .text .content::after {
+    border: 14rpx solid transparent;
+    top: 23rpx;
+    border-right-color: #fff;
+  }
+
+  .input-panel {
+    height: 120rpx;
+    box-sizing: border-box;
+    padding: 13rpx 20rpx 0;
+    background: #f5f5f7;
+    border-top: #d7d7d9 1rpx solid;
+    box-sizing: border-box;
+    display: flex;
+  }
+
+  .send-input {
+    flex: 1;
+    height: 92rpx;
+    background: #fff;
+    border: #ddd 1rpx solid;
+    border-radius: 3px;
+    /* margin-right: 20rpx; */
+    box-sizing: border-box;
+    /* padding: 0 10rpx; */
+  }
 }
